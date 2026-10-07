@@ -1,0 +1,122 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>DEVBOX</title>
+<link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icon.svg"><meta name="theme-color" content="#1d1a17">
+<style>
+:root{--bg:#090b0a;--pn:rgba(22,26,24,.72);--ln:rgba(255,255,255,.09);--bone:#eef1ea;--mut:#8d968f;--lime:#c8f23d;--red:#ff5d4d;--ok:#c8f23d;--warn:#f3c24a;--r:22px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{background:var(--bg)}
+body{margin:0;color:var(--bone);font:15px/1.5 "Avenir Next","Segoe UI",system-ui,sans-serif;min-height:100vh;padding:env(safe-area-inset-top) 0 0}
+#globe{position:fixed;inset:0;width:100%;height:100%;z-index:-1;opacity:.85}
+h1,h2,h3{font-weight:650;letter-spacing:-.02em;margin:.2em 0}h2{font-size:28px;line-height:1.1}
+main{max-width:760px;margin:0 auto;padding:12px 16px 120px}
+header{display:flex;align-items:center;gap:10px;padding:14px 18px}
+.brand{font-weight:800;font-size:20px;letter-spacing:.02em;color:var(--bone);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:8px}.brand i{font-style:normal;color:var(--lime)}
+.brand svg{width:26px;height:26px}
+.tg{display:flex;gap:8px}.tg a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--pn);border:1px solid var(--ln);backdrop-filter:blur(14px);transition:transform .15s}.tg a:active{transform:scale(.9)}
+.tg svg{width:18px;height:18px;fill:var(--bone)}.tg span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button,input,select,textarea{font:inherit;color:var(--bone);background:rgba(255,255,255,.06);border:1px solid var(--ln);border-radius:14px;padding:11px 14px;min-height:44px}
+input::placeholder,textarea::placeholder{color:#5f6862}
+button{cursor:pointer;transition:transform .12s,background .2s}button:active{transform:scale(.96)}button:hover{background:rgba(255,255,255,.1)}
+button.pri{background:var(--lime);border-color:var(--lime);color:#10140a;font-weight:700;border-radius:99px;padding:11px 22px}button.pri:hover{background:#d8ff58}
+button.on{background:var(--bone);color:#10140a;border-color:var(--bone)}
+:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:var(--r);padding:18px;margin:14px 0;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>input{flex:1;min-width:140px}.mut{color:var(--mut)}.list{display:grid;gap:8px;margin-top:12px}
+.item{display:flex;justify-content:space-between;align-items:center;text-align:left;border-radius:16px}
+textarea{width:100%;min-height:260px;font:13px/1.5 ui-monospace,Menlo,monospace;resize:vertical;background:rgba(0,0,0,.45)}
+.chip{font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid var(--ln)}.LIVE{color:var(--lime);border-color:rgba(200,242,61,.5);background:rgba(200,242,61,.08)}.FAILED{color:var(--red);border-color:var(--red)}
+.QUEUED,.BUILDING,.TESTING,.DEPLOYING{color:var(--warn);border-color:var(--warn)}
+pre{background:rgba(0,0,0,.55);border-radius:14px;padding:12px;overflow:auto;font:12px/1.5 ui-monospace,Menlo,monospace;max-height:240px}
+.lock{border:1px dashed rgba(255,255,255,.25);text-align:center}table{width:100%;border-collapse:collapse}td,th{padding:8px 4px;border-bottom:1px solid var(--ln);text-align:left;font-size:13px;vertical-align:middle}
+.url{font:13px ui-monospace,monospace;word-break:break-all;color:var(--lime)}
+.tabs{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:2px;padding:6px;border-radius:99px;background:rgba(18,21,19,.82);border:1px solid var(--ln);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);z-index:5;max-width:94vw;overflow-x:auto}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:1px;border:0;background:none;border-radius:99px;font-size:10.5px;padding:7px 12px;min-height:50px;color:var(--mut)}.tabs svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button.on{background:var(--lime);color:#10140a}
+.me{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.av{width:46px;height:46px;border-radius:50%;background:var(--lime);color:#10140a;display:grid;place-items:center;font-weight:800;font-size:18px}
+.bar{height:6px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:6px;width:160px}.bar i{display:block;height:100%;background:var(--lime);border-radius:9px;transition:width .6s}
+.hero{padding:34px 4px 6px}.hero h2{font-size:38px;max-width:11em}
+.ob{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:10px 0;scrollbar-width:none}.ob::-webkit-scrollbar{display:none}
+.ob>div{flex:0 0 100%;scroll-snap-align:center;padding:26px 6px 10px}.ob h2{font-size:34px}.ob p{max-width:20em}
+.dots{display:flex;gap:6px;margin:6px 0 14px}.dots i{width:7px;height:7px;border-radius:9px;background:rgba(255,255,255,.25);transition:all .25s}.dots i.on{width:22px;background:var(--lime)}
+.glass{max-width:420px;margin:16px auto}
+#splash{position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;z-index:50;transition:opacity .6s .1s,visibility .6s .1s}#splash.out{opacity:0;visibility:hidden}
+#splash svg{width:92px;height:92px;animation:pop .9s cubic-bezier(.2,1.4,.3,1) both}@keyframes pop{from{transform:scale(.3) rotate(-25deg);opacity:0}}
+#splash b{display:block;text-align:center;margin-top:14px;letter-spacing:.3em;font-size:13px;color:var(--mut);animation:fade 1s .5s both}@keyframes fade{from{opacity:0}}
+#toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);background:var(--bone);color:#10140a;padding:11px 18px;border-radius:99px;max-width:90%;display:none;z-index:60;font-weight:600}#toast.err{background:var(--red);color:#fff}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body><canvas id="globe"></canvas><div id="splash" aria-hidden="true"><div><svg viewBox="0 0 512 512"><rect x="64" y="64" width="384" height="384" rx="96" fill="none" stroke="#eef1ea" stroke-width="32"/><path d="M200 190l-60 66 60 66M312 190l60 66-60 66" fill="none" stroke="#c8f23d" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/></svg><b>DEVBOX</b></div></div><div id="app"></div><div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),app=$('#app');let me=null,cfg={},badges=[];
+const S={tab:'p',pid:null,file:'index.html',projects:[],deps:[],logs:null,users:[],board:[],chs:[],timer:0,mode:'login'};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(p,m='GET',b){const r=await fetch('/api'+p,{method:m,headers:m==='GET'?{}:{'content-type':'application/json'},body:m==='GET'?undefined:JSON.stringify(b||{})});const d=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(d.error||r.statusText),{code:d.code});return d}
+let ac;function beep(f=520,t=.07){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+t)}catch{}}
+function toast(m,err){const t=$('#toast');t.textContent=m;t.className=err?'err':'';t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3200);beep(err?200:760,.1)}
+const TG=[['Chaîne','https://t.me/YureiDev_Ofc_chanel'],['Groupe','https://t.me/alonyzexbannerchat'],['Dev','https://t.me/Yurei_JianYu']];
+const plane='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.5 2.8 10.7c-.9.4-.9 1.1-.2 1.3l4.8 1.5 1.8 5.5c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.2-.4-1.7-1.3-1.3zM8.5 13.2l9.6-6.1c.5-.3.9-.1.5.2l-7.8 7.1-.3 3.2z"/></svg>';
+const head=()=>`<header><a class="brand" href="/"><svg viewBox="0 0 512 512"><rect x="64" y="64" width="384" height="384" rx="96" fill="none" stroke="#eef1ea" stroke-width="32"/><path d="M200 190l-60 66 60 66M312 190l60 66-60 66" fill="none" stroke="#c8f23d" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/></svg><span>DEV<i>BOX</i></span></a><nav class="tg" aria-label="Communauté Telegram">${TG.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener" aria-label="Telegram — ${n}" title="${n}">${plane}<span>${n}</span></a>`).join('')}</nav></header>`;
+const TPL={'index.html':'<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>Mon site</title>\n<link rel="stylesheet" href="style.css">\n</head>\n<body>\n<h1>Bonjour DEVBOX</h1>\n<script src="app.js"><\/script>\n</body>\n</html>','style.css':'body{font-family:system-ui;margin:2rem}','app.js':'console.log("en ligne")'};
+const IC={p:'<svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4v10l-8 4-8-4zM4 7l8 4 8-4M12 11v10"/></svg>',c:'<svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0zM17 5h3v2a3 3 0 01-3 3M7 5H4v2a3 3 0 003 3"/></svg>',b:'<svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg>',m:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.4 4.2 1.1 6.1L12 16.9 6.5 19.7l1.1-6.1L3.2 9.4l6.1-.8z"/></svg>',a:'<svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>'};
+const cur=()=>S.projects.find(p=>p.id===S.pid);
+const FINAL=['LIVE','FAILED','STOPPED','SUPERSEDED'];
+function dpHtml(){const p=cur();if(!p)return'';return`<h3>Déploiements</h3>${p.url?`<p class="url">${esc(p.url)}</p><div class="row"><button data-act="copy">Copier le lien</button><button data-act="share">Partager</button><a href="${esc(p.url)}" target="_blank" rel="noopener"><button>Ouvrir</button></a><button data-act="stop">Arrêter</button></div>`:'<p class="mut">Hors ligne. Lancez un déploiement pour obtenir un lien public.</p>'}
+<table><tr><th>Version</th><th>Statut</th><th></th></tr>${S.deps.map(d=>`<tr><td>v${d.version}</td><td><span class="chip ${d.status}">${d.status}</span>${d.err?`<div class="mut">${esc(d.err)}</div>`:''}</td><td><button data-act="logs" data-id="${d.id}">Logs</button> ${['SUPERSEDED','STOPPED'].includes(d.status)?`<button data-act="activate" data-id="${d.id}">Remettre en ligne</button>`:''}</td></tr>`).join('')||'<tr><td colspan=3 class="mut">Aucun déploiement.</td></tr>'}</table>${S.logs?`<pre>${esc(S.logs.map(l=>new Date(l.ts).toLocaleTimeString()+' '+l.line).join('\n'))}</pre>`:''}`}
+async function loadDeps(){const p=cur();if(!p)return;await loadProjects();S.deps=(await api(`/projects/${p.id}/deploys`)).deploys;const el=$('#dp');if(el)el.innerHTML=dpHtml();clearTimeout(S.timer);if(S.deps.some(d=>!FINAL.includes(d.status)))S.timer=setTimeout(loadDeps,700)}
+async function loadProjects(){S.projects=(await api('/projects')).projects}
+function editor(p){return`<section class="card"><h3>${esc(p.name)}</h3><div class="row"><select id="fs" aria-label="Fichier">${Object.keys(p.files).map(f=>`<option ${f===S.file?'selected':''}>${esc(f)}</option>`).join('')}</select><input id="nf" placeholder="nouveau-fichier.js"><button data-act="addf">Ajouter</button></div>
+<textarea id="ed" spellcheck="false" aria-label="Contenu du fichier">${esc(p.files[S.file]??'')}</textarea><div class="row" style="margin-top:8px"><button data-act="save">Enregistrer</button><button class="pri" data-act="deploy">Créer un déploiement</button></div><div id="dp">${dpHtml()}</div></section>`}
+const lockCard=()=>me.premium.active?'':`<section class="card lock"><h3>Déploiements avancés</h3><p>🔒 Premium</p><p class="mut">Plusieurs sites en ligne en même temps et des limites plus hautes.</p><button data-act="tab" data-t="m">Voir Premium</button></section>`;
+function projectsView(){const p=cur();return`<section class="card"><div class="row"><input id="np" placeholder="Nom du projet"><button data-act="newp" class="pri">Créer le projet</button></div><div class="list">${S.projects.map(x=>`<button class="item ${x.id===S.pid?'on':''}" data-act="open" data-id="${x.id}"><b>${esc(x.name)}</b><span class="chip ${x.live?'LIVE':''}">${x.live?'En ligne':'Hors ligne'}</span></button>`).join('')||'<p class="mut">Aucun projet. Créez-en un pour obtenir votre premier lien public.</p>'}</div></section>${p?editor(p):''}${lockCard()}`}
+function chView(){return`<section class="card"><h3>Challenges</h3><div class="list">${S.chs.map(c=>`<div class="item card" style="margin:0"><span><b>${esc(c.title)}</b><br><span class="mut">${c.xp} XP — ${c.participants} participant(s)</span></span><span class="row"><a href="/c/${esc(c.slug)}"><button>Ouvrir</button></a><button data-act="shareurl" data-u="/c/${esc(c.slug)}">Partager</button></span></div>`).join('')||'<p class="mut">Aucun challenge pour le moment.</p>'}</div></section>`}
+const boardView=()=>`<section class="card"><h3>Classement</h3><table>${S.board.map((t,i)=>`<tr><td>${i+1}</td><td><a style="color:inherit" href="/u/${esc(t.handle)}">${esc(t.handle)}</a></td><td>Niv. ${t.level}</td><td>${t.xp} XP</td></tr>`).join('')}</table></section>`;
+const premView=()=>`<section class="card"><h3>Premium</h3><p>${me.premium.active?`Actif — niveau ${me.premium.level}, jusqu'au ${new Date(me.premium.until).toLocaleDateString()} — ${me.premium.maxSites} site(s) en ligne.`:'Votre compte est gratuit : 1 site en ligne, 5 projets.'}</p><p class="mut">Le paiement n'est pas encore relié. Premium est accordé par un administrateur.</p></section>`;
+function adminView(){return`<section class="card"><h3>Nouveau challenge</h3><div class="row"><input id="ct" placeholder="Titre"><input id="ca" placeholder="Réponse attendue"><input id="cx" type="number" placeholder="XP" style="max-width:90px"></div><textarea id="cb" style="min-height:70px" placeholder="Énoncé"></textarea><button data-act="mkch" class="pri">Publier</button></section>
+<section class="card"><h3>Utilisateurs</h3><div style="overflow:auto"><table>${S.users.map(u=>`<tr><td>${esc(u.handle)}<div class="mut">${esc(u.email)}</div></td><td><select data-role="${u.id}">${['USER','PREMIUM_USER','CONTENT_MANAGER','CHALLENGE_MANAGER','MODERATOR','ADMIN','SUPER_ADMIN','OWNER'].map(r=>`<option ${r===u.role?'selected':''}>${r}</option>`).join('')}</select> <button data-act="role" data-id="${u.id}">Rôle</button></td><td><input data-pl="${u.id}" type="number" min="0" max="3" value="${u.prem_level}" style="width:60px" aria-label="Niveau Premium"><input data-pu="${u.id}" type="date" value="${u.prem_until?new Date(u.prem_until).toISOString().slice(0,10):''}"><input data-pm="${u.id}" type="number" min="1" value="${u.max_sites}" style="width:60px" aria-label="Sites max"><button data-act="prem" data-id="${u.id}">Premium</button></td></tr>`).join('')}</table></div></section>`}
+function authView(){const reg=S.mode==='register',ob=!localStorage.getItem('dbx_ob');
+const slides=[['Codez. Déployez.','Un vrai lien public en quelques secondes, ouvrable sur n\'importe quel téléphone.'],['Progressez.','Challenges, XP, badges et séries : votre niveau est enregistré sur le serveur.'],['Partagez.','Envoyez votre site, un challenge ou votre profil par lien.']];
+const form=`<section class="card glass"><h3>${reg?'Créer un compte':'Se connecter'}</h3><div class="list">${cfg.google?'<div id="g" style="display:flex;justify-content:center;min-height:44px"></div><div class="mut" style="text-align:center">ou avec un email</div>':'<p class="mut">Connexion Google non configurée sur ce serveur.</p>'}${reg?'<input id="h" placeholder="Pseudo" autocomplete="username">':''}<input id="e" type="email" placeholder="Email" autocomplete="email"><input id="pw" type="password" placeholder="Mot de passe (8 caractères min.)" autocomplete="${reg?'new':'current'}-password"><button class="pri" data-act="auth">${reg?'Créer mon compte':'Me connecter'}</button><button data-act="mode">${reg?'J\'ai déjà un compte':'Créer un compte'}</button></div></section>`;
+return`${head()}<main>${ob?`<div class="ob" id="ob">${slides.map(([t,p])=>`<div><h2>${t}</h2><p class="mut">${p}</p></div>`).join('')}</div><div class="dots" id="dots"><i class="on"></i><i></i><i></i></div><button class="pri" data-act="obgo">Commencer</button>`:`<div class="hero"><h2>Du code au lien public.</h2></div>${form}`}</main>`}
+function dash(){const tabs=[['p','Projets'],['c','Challenges'],['b','Classement'],['m','Premium']];if(me.perms.includes('*')||me.perms.includes('users')||me.perms.includes('challenges'))tabs.push(['a','Admin']);
+const body={p:projectsView,c:chView,b:boardView,m:premView,a:adminView}[S.tab]();return`${head()}<div class="tabs">${tabs.map(([k,n])=>`<button class="${S.tab===k?'on':''}" data-act="tab" data-t="${k}" aria-label="${n}">${IC[k]}${n}</button>`).join('')}<button data-act="out" aria-label="Sortir"><svg viewBox="0 0 24 24"><path d="M9 4H5v16h4M16 8l4 4-4 4M20 12H9"/></svg>Sortir</button></div><main><div class="card me"><div class="av">${esc(me.handle[0]||'?').toUpperCase()}</div><div style="flex:1"><b>${esc(me.handle)}</b> <span class="chip">Niv. ${me.level}</span><div class="mut">${me.xp} XP — série ${me.streak} j${badges.length?' — '+badges.join(', '):''}</div><div class="bar"><i style="width:${Math.min(100,Math.round(((me.xp-50*(me.level-1)**2)/(50*(me.level**2-(me.level-1)**2)))*100))}%"></i></div></div><button data-act="shareurl" data-u="/u/${esc(me.handle)}">Partager mon profil</button></div>${body}</main>`}
+async function render(){const P=location.pathname;let m;
+ if(m=P.match(/^\/c\/([^/]+)$/)){try{const{challenge:c}=await api('/challenges/'+m[1]);app.innerHTML=`${head()}<main><section class="card"><h2>${esc(c.title)}</h2><p>${esc(c.body)}</p><p class="mut">${c.xp} XP — ${c.participants} participant(s)</p>${me?(c.done?'<p class="chip LIVE">Réussi</p>':`<div class="row"><input id="ans" placeholder="Votre réponse"><button class="pri" data-act="submit" data-s="${esc(c.slug)}">Valider</button></div>`):'<a href="/"><button class="pri">Se connecter pour participer</button></a>'}</section></main>`}catch(e){app.innerHTML=head()+`<main><p>${esc(e.message)}</p></main>`}return}
+ if(m=P.match(/^\/u\/([^/]+)$/)){try{const{profile:t}=await api('/u/'+m[1]);app.innerHTML=`${head()}<main><section class="card"><h2>${esc(t.handle)}</h2><p>Niveau ${t.level} — ${t.xp} XP — série ${t.streak} j — ${t.sites} site(s) en ligne</p><p class="mut">${t.badges.join(', ')||'Aucun badge pour le moment'}</p></section></main>`}catch(e){app.innerHTML=head()+`<main><p>${esc(e.message)}</p></main>`}return}
+ if(!me){app.innerHTML=authView();if(cfg.google){if(window.google)gsi();else{const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.onload=gsi;s.onerror=()=>toast('Google injoignable : vérifiez votre connexion',1);document.head.appendChild(s)}}return}
+ if(S.tab==='c')S.chs=(await api('/challenges')).challenges;if(S.tab==='b')S.board=(await api('/leaderboard')).top;if(S.tab==='a')S.users=(await api('/admin/users').catch(()=>({users:[]}))).users;
+ try{const m=await api('/me');me=m.user;badges=m.badges}catch{}
+ app.innerHTML=dash()}
+function gsi(){google.accounts.id.initialize({client_id:cfg.google,callback:async r=>{try{me=(await api('/auth/google','POST',{credential:r.credential})).user;await enter()}catch(e){toast(e.message,1)}}});const g=$('#g');if(g)google.accounts.id.renderButton(g,{theme:'filled_black',size:'large',shape:'pill',text:'continue_with',width:Math.min(340,g.parentElement.clientWidth||340),locale:'fr'})}
+async function enter(){await loadProjects();const m=await api('/me');me=m.user;badges=m.badges;render()}
+const val=id=>document.getElementById(id)?.value;
+const A={
+ async obgo(){localStorage.setItem('dbx_ob','1');beep(660);render()},
+ async mode(){S.mode=S.mode==='login'?'register':'login';render()},
+ async auth(){const reg=S.mode==='register',r=await api(reg?'/auth/register':'/auth/login','POST',{email:val('e'),password:val('pw'),handle:val('h')});me=r.user;beep(880);await enter()},
+ async out(){await api('/auth/logout','POST');me=null;S.projects=[];render()},
+ async tab(d){S.tab=d.t;await render()},
+ async newp(){const n=val('np');const r=await api('/projects','POST',{name:n,files:TPL});await loadProjects();S.pid=r.project.id;S.file='index.html';S.logs=null;await loadDeps();render();toast('Projet créé')},
+ async open(d){S.pid=+d.id;S.file='index.html';S.logs=null;await loadDeps();render()},
+ async addf(){const f=val('nf').trim();if(!f)return;cur().files[f]='';S.file=f;render()},
+ async save(){await api('/projects/'+S.pid,'PUT',{files:cur().files});toast('Enregistré')},
+ async deploy(){await A.save();await api(`/projects/${S.pid}/deploy`,'POST');S.logs=null;toast('Déploiement lancé');await loadDeps()},
+ async stop(){await api(`/projects/${S.pid}/stop`,'POST');await loadProjects();await loadDeps();render();toast('Site arrêté')},
+ async activate(d){await api(`/deploys/${d.id}/activate`,'POST');await loadProjects();await loadDeps();render();toast('Version remise en ligne')},
+ async logs(d){S.logs=(await api(`/deploys/${d.id}/logs`)).logs;$('#dp').innerHTML=dpHtml()},
+ async copy(){await navigator.clipboard.writeText(cur().url);toast('Lien copié')},
+ async share(){const u=cur().url;navigator.share?navigator.share({title:cur().name,url:u}).catch(()=>{}):A.copy()},
+ async shareurl(d){const u=location.origin+d.u;navigator.share?navigator.share({url:u}).catch(()=>{}):(await navigator.clipboard.writeText(u),toast('Lien copié'))},
+ async submit(d){const r=await api(`/challenges/${d.s}/submit`,'POST',{answer:val('ans')});toast(r.ok?(r.already?'Déjà réussi':`Bravo ! +${r.xp} XP`):'Mauvaise réponse',!r.ok);if(r.ok){const m=await api('/me');me=m.user;badges=m.badges;render()}},
+ async mkch(){const r=await api('/challenges','POST',{title:val('ct'),answer:val('ca'),xp:val('cx'),body:val('cb')});toast('Publié : /c/'+r.slug)},
+ async role(d){await api('/admin/role','POST',{uid:+d.id,role:$(`[data-role="${d.id}"]`).value});toast('Rôle mis à jour')},
+ async prem(d){const q=k=>$(`[data-${k}="${d.id}"]`).value;await api('/admin/premium','POST',{uid:+d.id,level:q('pl'),until:q('pu'),maxSites:q('pm')});toast('Premium mis à jour')}};
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;beep();try{await A[b.dataset.act](b.dataset)}catch(x){toast(x.message,1);if(x.code==='PREMIUM_REQUIRED'){S.tab='m';render()}}});
+document.addEventListener('scroll',e=>{if(e.target.id==='ob'){const i=Math.round(e.target.scrollLeft/e.target.clientWidth);document.querySelectorAll('#dots i').forEach((d,k)=>d.classList.toggle('on',k===i))}},true);
+document.addEventListener('input',e=>{if(e.target.id==='ed')cur().files[S.file]=e.target.value});
+document.addEventListener('change',e=>{if(e.target.id==='fs'){S.file=e.target.value;$('#ed').value=cur().files[S.file]??''}});
+(async()=>{try{cfg=await api('/config')}catch{app.innerHTML=head()+'<main><section class="card glass"><h3>Serveur injoignable</h3><p class="mut">DEVBOX a besoin de son serveur. Ouvrez le lien où il est hébergé (https://…) dans Chrome, pas le fichier index.html.</p><button class="pri" onclick="location.reload()">Réessayer</button></section></main>';return}try{const m=await api('/me');me=m.user;badges=m.badges;await loadProjects()}catch{}render();if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{})})();
+
+(function(){const c=document.getElementById('globe'),g=c.getContext('2d'),N=900,P=[];for(let i=0;i<N;i++){const y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),a=i*2.399963;P.push([Math.cos(a)*r,y,Math.sin(a)*r])}
+let t=0;function fit(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio}fit();addEventListener('resize',fit);
+function f(){t+=.0035;const w=c.width,h=c.height,R=Math.min(w,h)*.42,cx=w*.5,cy=h*.38,ca=Math.cos(t),sa=Math.sin(t);g.clearRect(0,0,w,h);
+for(const[x,y,z]of P){const X=x*ca+z*sa,Z=-x*sa+z*ca,k=(Z+1.4)/2.4;g.fillStyle=`rgba(200,242,61,${.08+.7*k*k*(Z>0?1:.3)})`;g.fillRect(cx+X*R,cy+y*R,devicePixelRatio*(.6+1.2*k),devicePixelRatio*(.6+1.2*k))}
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(f)}f();
+const sp=document.getElementById('splash');setTimeout(()=>{sp.classList.add('out');[440,660,880].forEach((fr,i)=>setTimeout(()=>beep(fr,.12),i*90))},1300);})();
+</script></body></html>

@@ -1,0 +1,5 @@
+# Reverse proxy + HTTPS wildcard (Caddy compilé avec le module DNS de votre registrar, ici Cloudflare)
+yureixsiryx.dev, *.yureixsiryx.dev {
+	tls { dns cloudflare {env.CF_API_TOKEN} }
+	reverse_proxy 127.0.0.1:8080
+}
