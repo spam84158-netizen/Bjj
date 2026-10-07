@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: devbox
+    runtime: docker
+    plan: starter            # un disque persistant exige un plan payant
+    disk: {name: data, mountPath: /data, sizeGB: 5}
+    envVars:
+      - {key: ROOT_DOMAIN, value: yureixsiryx.dev}
+      - {key: OWNER_EMAIL, sync: false}
+      - {key: GOOGLE_CLIENT_ID, sync: false}

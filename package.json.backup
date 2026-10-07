@@ -1,0 +1,1 @@
+{"name":"devbox","version":"1.0.0","type":"module","private":true,"scripts":{"start":"node server.mjs"},"engines":{"node":">=22.13"}}
